@@ -10,22 +10,25 @@ contract("Verifier", (accounts) => {
         const mnemonicWallet = Wallet.fromMnemonic(MNEMONIC);
         const wallet = new Wallet(mnemonicWallet.privateKey || "", provider);
 
-        let messageHash = ethers.utils.id("Deepanshu Singh");
+        let message = "Deepanshu";
 
-        let messageHashBytes = ethers.utils.arrayify(messageHash);
+        // Sign the string message
+        let flatSig = await wallet.signMessage(message);
 
-        let flatSig = await wallet.signMessage(messageHashBytes);
-
-        console.log("Signature: " + flatSig);
-
+        // For Solidity, we need the expanded-format of a signature
         let sig = ethers.utils.splitSignature(flatSig);
 
-        let recovered = await contract.verifyHash(
-            messageHash,
+        // Call the verifyString function
+        let recovered = await contract.verifyString(
+            message,
             sig.v,
             sig.r,
             sig.s,
         );
+
+        console.log("message: " + message);
+        console.log("Wallet Address: " + wallet.address);
+        console.log("Signed message with my wallet: " + flatSig);
 
         assert.equal(recovered, wallet.address);
     });
