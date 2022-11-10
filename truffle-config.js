@@ -94,16 +94,6 @@ module.exports = {
             skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
         },
         //
-        // Useful for private networks
-        private: {
-            provider: () =>
-                new HDWalletProvider(
-                    MNEMONIC,
-                    `https://rpc-goerli.flashbots.net`,
-                ),
-            network_id: "*", // This network is yours, in the cloud.
-            //production: true, // Treats this network as if it was a public net. (default: false)
-        },
     },
 
     // Set default mocha options here, use special reporters, etc.

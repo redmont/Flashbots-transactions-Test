@@ -2005,8 +2005,7 @@
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-09T22:21:31.420Z",
-  "networkType": "ethereum",
+  "updatedAt": "2022-11-10T01:19:23.670Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

